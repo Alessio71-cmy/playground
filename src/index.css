@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html, body {
+  background: #000;
+}
+
 body {
   font-family: "Bricolage Grotesque", system-ui, sans-serif;
   overflow: hidden;
@@ -38,12 +42,12 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100dvh;
-    height: 100dvw;
+    width: 100lvh;
+    height: 100lvw;
     transform: rotate(90deg) translateY(-100%);
     transform-origin: top left;
-    --sw: 100dvh;
-    --sh: 100dvw;
+    --sw: 100lvh;
+    --sh: 100lvw;
   }
 }
 
@@ -72,7 +76,7 @@ body {
 }
 
 .balance-beam {
-  animation: beamRock 12s 1 forwards;
+  animation: beamRock 16s 1 forwards;
 }
 
 @keyframes beamRock {
@@ -146,7 +150,7 @@ body {
   74.30% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
   74.53% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
   74.77% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  75.00%, 100.00% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  75.00%, 100.00% { transform: rotate(var(--final-tilt, 24deg)); animation-timing-function: ease-in-out; }
 }
 
 /* Glitch runs over the first 75% (12s); last 25% (4s) is a held black stop. */
@@ -222,4 +226,33 @@ body {
   74.53% { background-color: #ffffff; }
   74.77% { background-color: #111111; }
   75.00%, 100.00% { background-color: #000000; }
+}
+
+/* Result reveal: dark screens (1-5) fade in "magically" in place. */
+.magic-in {
+  animation: magicIn 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes magicIn {
+  from { opacity: 0; transform: scale(0.92); filter: blur(6px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+/* Result reveal: light screens (6-8) rise from below, solemnly. */
+.solemn-rise {
+  animation: solemnRise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes solemnRise {
+  from { opacity: 0; transform: translateY(48px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.solemn-gradient {
+  animation: solemnGradient 900ms ease both;
+}
+
+@keyframes solemnGradient {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

@@ -114,9 +114,12 @@ const LIGHT_SCREENS = [
 function ResultScreen({ Icon, title, subtitle, line }) {
   return (
     <div className="relative w-full h-dvh bg-black flex flex-col items-center justify-center px-8 text-center">
-      <Icon style={{ width: 'clamp(56px, 14dvh, 96px)', height: 'auto', color: GREY }} />
+      <Icon
+        className="magic-in"
+        style={{ width: 'clamp(56px, 14dvh, 96px)', height: 'auto', color: GREY, animationDelay: '0ms' }}
+      />
       <p
-        className="max-w-3xl"
+        className="max-w-3xl magic-in"
         style={{
           marginTop: 'clamp(24px, 6dvh, 48px)',
           fontSize: 38,
@@ -124,18 +127,19 @@ function ResultScreen({ Icon, title, subtitle, line }) {
           fontWeight: 300,
           fontStyle: 'italic',
           color: GREY,
+          animationDelay: '150ms',
         }}
       >
         {title}
       </p>
-      <div style={{ marginTop: 'clamp(24px, 6dvh, 48px)' }}>
+      <div className="magic-in" style={{ marginTop: 'clamp(24px, 6dvh, 48px)', animationDelay: '300ms' }}>
         {subtitle.map((s, i) => (
           <p key={i} style={{ fontSize: 14, color: GOLD, marginTop: i === 0 ? 0 : 4 }}>
             {s}
           </p>
         ))}
       </div>
-      <div className="flex items-center" style={{ gap: 4, marginTop: 4 }}>
+      <div className="flex items-center magic-in" style={{ gap: 4, marginTop: 4, animationDelay: '450ms' }}>
         <Icon style={{ width: 22, height: 22, color: GOLD }} />
         <span style={{ fontSize: 22, color: GOLD }}>{line}</span>
       </div>
@@ -148,14 +152,19 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
   return (
     <div
       className="relative w-full h-dvh flex flex-col items-center justify-center px-8 text-center overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #B8860B, #FFFFFF)' }}
+      style={{ backgroundColor: '#000000' }}
     >
+      <div
+        className="absolute inset-0 solemn-gradient"
+        style={{ background: 'linear-gradient(to bottom, #B8860B, #FFFFFF)', animationDelay: '0ms' }}
+      />
       <Figure
         mainColor="#ffffff"
-        style={{ width: 'clamp(120px, 30dvh, 220px)', height: 'auto', flexShrink: 0 }}
+        className="relative solemn-rise"
+        style={{ width: 'clamp(120px, 30dvh, 220px)', height: 'auto', flexShrink: 0, animationDelay: '0ms' }}
       />
       <p
-        className="max-w-3xl"
+        className="relative max-w-3xl solemn-rise"
         style={{
           marginTop: 'clamp(24px, 6dvh, 48px)',
           fontSize: 38,
@@ -163,6 +172,7 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
           fontWeight: 300,
           fontStyle: 'italic',
           color: GOLD,
+          animationDelay: '350ms',
         }}
       >
         {titleLines.map((l, i) => (
@@ -172,14 +182,14 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
           </span>
         ))}
       </p>
-      <div style={{ marginTop: 'clamp(24px, 6dvh, 48px)' }}>
+      <div className="relative solemn-rise" style={{ marginTop: 'clamp(24px, 6dvh, 48px)', animationDelay: '600ms' }}>
         {subtitle.map((s, i) => (
           <p key={i} style={{ fontSize: 14, color: GOLD, marginTop: i === 0 ? 0 : 4 }}>
             {s}
           </p>
         ))}
       </div>
-      <div className="flex items-center" style={{ gap: 4, marginTop: 4 }}>
+      <div className="relative flex items-center solemn-rise" style={{ gap: 4, marginTop: 4, animationDelay: '800ms' }}>
         <Icon style={{ width: 22, height: 22, color: GOLD }} />
         <span style={{ fontSize: 22, color: GOLD }}>{line}</span>
       </div>

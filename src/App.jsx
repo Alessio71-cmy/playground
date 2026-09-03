@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSession, useSessionStorage } from './session/SessionContext.jsx'
 import { Figure } from './components/SplashArt.jsx'
+import { SCREENS, LIGHT_SCREENS, ResultScreen, LightResultScreen } from './components/ResultScreens.jsx'
 
 const PHRASE_WORDS = ['Il', 'mio', 'unico', 'giudice', 'è', 'Anubi!']
 const PHRASE2_WORDS = ['Anubi,', 'ti', 'affido', 'il', 'giudizio']
@@ -36,17 +37,17 @@ const AnubiIcon = (props) => (
   </svg>
 )
 
-const BalanceIcon = ({ rocking = false, tilt, onRockEnd, ...props }) => (
+const BalanceIcon = ({ rocking = false, tilt = 0, restTilt = 24, ...props }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M12 3v18" />
     <path d="M8 21h8" />
     <g
       className={rocking ? 'balance-beam' : ''}
-      style={{
-        transformOrigin: '12px 7px',
-        ...(tilt !== undefined ? { transform: `rotate(${tilt}deg)` } : {}),
-      }}
-      onAnimationEnd={onRockEnd}
+      style={
+        rocking
+          ? { transformOrigin: '12px 7px', '--final-tilt': `${restTilt}deg` }
+          : { transformOrigin: '12px 7px', transform: `rotate(${tilt}deg)` }
+      }
     >
       <path d="M4 7h16" />
       <path d="M4 7 2 12a2.5 2.5 0 0 0 5 0L4 7Z" />
@@ -69,7 +70,8 @@ function App() {
   const [revealed2, setRevealed2] = useState(false)
   const [passed2, setPassed2] = useState(false)
   const [escalate, setEscalate] = useState(false)
-  const [finalTilt, setFinalTilt] = useState(null)
+  const [restTilt] = useState(() => [-24, 0, 24][Math.floor(Math.random() * 3)])
+  const [result, setResult] = useState(null)
   const recognitionRef2 = useRef(null)
 
   useEffect(() => {
@@ -78,9 +80,23 @@ function App() {
     return () => clearTimeout(timer)
   }, [passed2])
 
-  const handleRockEnd = () => {
-    if (finalTilt === null) setFinalTilt([-24, 0, 24][Math.floor(Math.random() * 3)])
-  }
+  // Glitch + rocking run for 16s (beamRock/escalatingEnergy), settling on restTilt
+  // for the last 4s. Reveal the result screen once the balance has held still.
+  useEffect(() => {
+    if (!escalate) return
+    const timer = setTimeout(() => {
+      const direction = restTilt < 0 ? 'left' : restTilt > 0 ? 'right' : 'center'
+      if (direction === 'left') {
+        const pool = [SCREENS[0], SCREENS[1], SCREENS[3]]
+        setResult({ Screen: ResultScreen, data: pool[Math.floor(Math.random() * pool.length)] })
+      } else if (direction === 'right') {
+        setResult({ Screen: ResultScreen, data: SCREENS[2] })
+      } else {
+        setResult({ Screen: LightResultScreen, data: LIGHT_SCREENS[Math.floor(Math.random() * LIGHT_SCREENS.length)] })
+      }
+    }, 16000)
+    return () => clearTimeout(timer)
+  }, [escalate, restTilt])
 
   const listen = ({ requiredTokens, setListening, setMatchedCount, onDone }) => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -283,15 +299,20 @@ function App() {
         }}
       />
       {passed2 ? (
+        result ? (
+          <div className="absolute inset-0">
+            <result.Screen {...result.data} />
+          </div>
+        ) : (
         <div className={`absolute inset-0 flex items-center justify-center${escalate ? ' escalation-container' : ''}`} style={{ backgroundColor: '#000000' }}>
           <BalanceIcon
             className={escalate ? 'escalation-svg' : ''}
-            rocking={escalate && finalTilt === null}
-            tilt={escalate ? (finalTilt ?? undefined) : 0}
-            onRockEnd={handleRockEnd}
+            rocking={escalate}
+            restTilt={restTilt}
             style={{ width: 'clamp(72px, calc(var(--sh) * 0.2), 130px)', height: 'auto', color: '#ffffff' }}
           />
         </div>
+        )
       ) : (
       <div className="grid" style={{ placeItems: 'center' }}>
       <div
