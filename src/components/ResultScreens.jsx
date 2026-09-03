@@ -185,21 +185,15 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
         className="absolute inset-0 solemn-gradient"
         style={{ background: 'linear-gradient(to bottom, #B8860B, #FFFFFF)', animationDelay: '0ms' }}
       />
-      <Figure
-        mainColor="#ffffff"
-        className="relative solemn-rise"
-        style={{ width: 'clamp(120px, 30dvh, 220px)', height: 'auto', flexShrink: 0, animationDelay: '0ms' }}
-      />
       <p
         className="relative max-w-3xl solemn-rise"
         style={{
-          marginTop: 'clamp(24px, 6dvh, 48px)',
           fontSize: 38,
           lineHeight: 1.1,
           fontWeight: 300,
           fontStyle: 'italic',
           color: GOLD,
-          animationDelay: '350ms',
+          animationDelay: '0ms',
         }}
       >
         {titleLines.map((l, i) => (
@@ -209,6 +203,11 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
           </span>
         ))}
       </p>
+      <Figure
+        mainColor="#ffffff"
+        className="relative solemn-rise"
+        style={{ width: '100%', height: 'auto', flexShrink: 0, marginTop: 'clamp(24px, 6dvh, 48px)', animationDelay: '350ms' }}
+      />
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-4 sm:pb-8">
         <div className="solemn-rise" style={{ animationDelay: '600ms' }}>
           {subtitle.map((s, i) => (

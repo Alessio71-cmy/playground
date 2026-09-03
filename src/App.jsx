@@ -30,8 +30,8 @@ const CUMULATIVE_REQUIRED_2 = buildCumulative(PHRASE2_WORDS)
 const REQUIRED_TOKENS_3 = buildRequired(PHRASE3_WORDS)
 const CUMULATIVE_REQUIRED_3 = buildCumulative(PHRASE3_WORDS)
 
-const AnubiIcon = ({ rocking = false, restTilt = 24, ...props }) => (
-  <svg viewBox="0 0 482 460" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+const AnubiIcon = ({ rocking = false, restTilt = 24, style, ...props }) => (
+  <svg viewBox="0 0 482 460" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible', ...style }} {...props}>
     {/* Beam + the two pans: the only part that swings, pinned at the pivot ball's center. */}
     <g
       className={rocking ? 'escalation-rock' : ''}
@@ -60,7 +60,8 @@ function App() {
   const [revealed2, setRevealed2] = useState(false)
   const [passed2, setPassed2] = useState(false)
   const [escalate, setEscalate] = useState(false)
-  const pickTilt = () => [-24, 0, 24][Math.floor(Math.random() * 3)]
+  // TEMP (this test session only): force center tilt so the glitch always settles on the light result screens (5/6/7). Revert to random after testing.
+  const pickTilt = () => 0
   const [restTilt, setRestTilt] = useState(pickTilt)
   const [result, setResult] = useState(null)
   const recognitionRef2 = useRef(null)
@@ -80,10 +81,9 @@ function App() {
   }, [passed2])
 
   // Post-glitch result screen holds for 5s, then fades out before the "embrace failure" phrase appears.
+  // TEMP (this test session only): disabled so the flow stops on the result screen. Revert after testing.
   useEffect(() => {
     if (!result) return
-    const timer = setTimeout(() => setResultFadingOut(true), 5000)
-    return () => clearTimeout(timer)
   }, [result])
 
   useEffect(() => {
@@ -280,7 +280,7 @@ function App() {
           transitionDelay: passed ? '0ms, 400ms' : '0ms, 0ms',
         }}
       >
-        <div className="flex flex-col items-center solemn-rise" style={{ animationDelay: '3900ms' }}>
+        <div className="flex flex-col items-center intro-fade-up" style={{ animationDelay: '3900ms' }}>
           <p style={{ fontSize: 16, color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
           <p
             className="px-8 text-center"
@@ -303,7 +303,7 @@ function App() {
           type="button"
           aria-label="audio"
           onClick={startListening}
-          className="flex items-center justify-center rounded-full solemn-rise"
+          className="flex items-center justify-center rounded-full intro-fade-up"
           style={{
             width: 48,
             height: 48,
@@ -328,7 +328,7 @@ function App() {
       </div>
       </Fragment>
       <div
-        className="force-landscape absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-8 py-4 overflow-hidden"
+        className="force-portrait absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-8 py-4 overflow-hidden"
         style={{
           opacity: passed ? 1 : 0,
           pointerEvents: passed ? 'auto' : 'none',

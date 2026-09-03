@@ -30,15 +30,15 @@ body {
   animation: escalatingEnergy 16s ease-in-out 1 forwards;
 }
 
-.force-landscape {
+.force-portrait {
   width: 100%;
   height: 100%;
   --sw: 100dvw;
   --sh: 100dvh;
 }
 
-@media screen and (max-width: 900px) and (orientation: portrait) {
-  .force-landscape {
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .force-portrait {
     position: fixed;
     top: 0;
     left: 0;
@@ -256,6 +256,11 @@ body {
 @keyframes introGlow {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* First screen: text and button rise in at a constant speed, matching the SVG/glow's linear entry. */
+.intro-fade-up {
+  animation: solemnRise 900ms linear both;
 }
 
 /* Result reveal: light screens (6-8) rise from below, solemnly. */
