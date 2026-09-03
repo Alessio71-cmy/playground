@@ -2,4 +2,220 @@
 
 body {
   font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.voice-bar {
+  width: 7px;
+  border-radius: 3px;
+  background: black;
+  animation: voice-bar-bounce 2.4s ease-in-out infinite;
+}
+
+@keyframes voice-bar-bounce {
+  0%, 100% { transform: scaleY(0.55); }
+  50% { transform: scaleY(1); }
+}
+
+.escalation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000000;
+  animation: escalatingEnergy 16s ease-in-out infinite;
+}
+
+.force-landscape {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  .force-landscape {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+  }
+}
+
+.rotate-in-hint {
+  animation: rotate-in-hint 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 1900ms;
+}
+
+@keyframes rotate-in-hint {
+  from { transform: rotate(-80deg) scale(0.7); opacity: 0; }
+  to { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+
+.escalation-svg {
+  width: clamp(50px, min(15vw, 20vh), 150px);
+  height: auto;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  animation: escalatingScale 16s ease-in infinite;
+}
+
+/* Glitch runs over the first 75% (12s); last 25% (4s) is a held black stop. */
+@keyframes escalatingScale {
+  0%, 60% { transform: scale(1); }
+  75%, 100% { transform: scale(1.9); }
+}
+
+.balance-beam {
+  animation: beamRock 16s infinite;
+}
+
+@keyframes beamRock {
+  0.00% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  17.99% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  27.65% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  31.76% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  34.81% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  37.01% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  39.12% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  40.49% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  41.84% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  43.15% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  44.45% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  45.71% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  46.96% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  48.20% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  49.40% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  50.59% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  51.77% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  52.93% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  54.07% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  55.20% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  56.32% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  57.42% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  58.51% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  59.59% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  60.12% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  60.65% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  61.18% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  61.70% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  62.23% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  62.74% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  63.26% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  63.78% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  64.29% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  64.80% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  65.31% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  65.81% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  66.31% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  66.82% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  67.31% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  67.56% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  67.81% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  68.05% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  68.30% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  68.55% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  68.80% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  69.04% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  69.28% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  69.53% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  69.77% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  70.01% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  70.26% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  70.50% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  70.74% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  70.98% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  71.22% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  71.46% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  71.70% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  71.94% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  72.18% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  72.41% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  72.65% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  72.89% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  73.12% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  73.36% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  73.60% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  73.83% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  74.07% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  74.30% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  74.53% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  74.77% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  75.00%, 100.00% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+}
+
+/* Glitch runs over the first 75% (12s); last 25% (4s) is a held black stop. */
+@keyframes escalatingEnergy {
+  0.00% { background-color: #000000; }
+  17.99% { background-color: #ffffff; }
+  27.65% { background-color: #000000; }
+  31.76% { background-color: #cccccc; }
+  34.81% { background-color: #000000; }
+  37.01% { background-color: #ffffff; }
+  39.12% { background-color: #111111; }
+  40.49% { background-color: #ffffff; }
+  41.84% { background-color: #000000; }
+  43.15% { background-color: #eeeeee; }
+  44.45% { background-color: #000000; }
+  45.71% { background-color: #ffffff; }
+  46.96% { background-color: #222222; }
+  48.20% { background-color: #ffffff; }
+  49.40% { background-color: #000000; }
+  50.59% { background-color: #dddddd; }
+  51.77% { background-color: #000000; }
+  52.93% { background-color: #ffffff; }
+  54.07% { background-color: #111111; }
+  55.20% { background-color: #ffffff; }
+  56.32% { background-color: #000000; }
+  57.42% { background-color: #ffffff; }
+  58.51% { background-color: #222222; }
+  59.59% { background-color: #000000; }
+  60.12% { background-color: #ffffff; }
+  60.65% { background-color: #000000; }
+  61.18% { background-color: #eeeeee; }
+  61.70% { background-color: #000000; }
+  62.23% { background-color: #ffffff; }
+  62.74% { background-color: #111111; }
+  63.26% { background-color: #ffffff; }
+  63.78% { background-color: #000000; }
+  64.29% { background-color: #dddddd; }
+  64.80% { background-color: #000000; }
+  65.31% { background-color: #ffffff; }
+  65.81% { background-color: #222222; }
+  66.31% { background-color: #ffffff; }
+  66.82% { background-color: #000000; }
+  67.31% { background-color: #ffffff; }
+  67.56% { background-color: #111111; }
+  67.81% { background-color: #ffffff; }
+  68.05% { background-color: #000000; }
+  68.30% { background-color: #ffffff; }
+  68.55% { background-color: #222222; }
+  68.80% { background-color: #ffffff; }
+  69.04% { background-color: #000000; }
+  69.28% { background-color: #eeeeee; }
+  69.53% { background-color: #000000; }
+  69.77% { background-color: #ffffff; }
+  70.01% { background-color: #111111; }
+  70.26% { background-color: #ffffff; }
+  70.50% { background-color: #000000; }
+  70.74% { background-color: #ffffff; }
+  70.98% { background-color: #222222; }
+  71.22% { background-color: #ffffff; }
+  71.46% { background-color: #000000; }
+  71.70% { background-color: #dddddd; }
+  71.94% { background-color: #000000; }
+  72.18% { background-color: #ffffff; }
+  72.41% { background-color: #111111; }
+  72.65% { background-color: #ffffff; }
+  72.89% { background-color: #000000; }
+  73.12% { background-color: #ffffff; }
+  73.36% { background-color: #222222; }
+  73.60% { background-color: #ffffff; }
+  73.83% { background-color: #000000; }
+  74.07% { background-color: #eeeeee; }
+  74.30% { background-color: #000000; }
+  74.53% { background-color: #ffffff; }
+  74.77% { background-color: #111111; }
+  75.00%, 100.00% { background-color: #000000; }
 }

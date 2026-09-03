@@ -1,24 +1,398 @@
+import { useEffect, useRef, useState } from 'react'
 import { useSession, useSessionStorage } from './session/SessionContext.jsx'
+import { Head, Body } from './components/SplashArt.jsx'
+
+const PHRASE_WORDS = ['Il', 'mio', 'unico', 'giudice', 'è', 'Anubi!']
+const PHRASE2_WORDS = ['Anubi,', 'ti', 'affido', 'il', 'giudizio']
+const normalize = (s) =>
+  s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z\s]/g, '')
+    .trim()
+// "è" is dropped as a required word: speech recognition often merges/loses it.
+const buildRequired = (words) => words.map(normalize).filter((w) => w && w !== 'e')
+const buildCumulative = (words) => {
+  let requiredSoFar = 0
+  return words.map((w) => {
+    const norm = normalize(w)
+    if (norm && norm !== 'e') requiredSoFar++
+    return requiredSoFar
+  })
+}
+const REQUIRED_TOKENS = buildRequired(PHRASE_WORDS)
+const CUMULATIVE_REQUIRED = buildCumulative(PHRASE_WORDS)
+const REQUIRED_TOKENS_2 = buildRequired(PHRASE2_WORDS)
+const CUMULATIVE_REQUIRED_2 = buildCumulative(PHRASE2_WORDS)
+
+const AnubiIcon = (props) => (
+  <svg viewBox="0 0 482 460" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M72.0374 183.32L112.507 328.83L131.487 394.01L139.837 393.71L109.527 289.13L76.1274 171.98C82.2674 169.81 85.5974 164.78 85.3674 159.12C85.1374 153.53 81.3574 148.97 75.4774 147.46L75.3274 130.53L290.767 130.49L290.847 130.52H405.417L405.537 147.6C399.177 148.92 395.897 154.12 395.757 159.77C395.617 165.39 399.307 170.13 405.117 172.23L385.697 240.81L341.347 393.86L349.667 393.98L373.667 310.71L408.937 183.33C414.767 200.19 424.397 242.61 429.087 259.31L466.887 394.06L475.407 393.92L415.747 180.49L414.007 171.78C419.227 169.31 422.347 164.93 422.297 159.77C422.247 154.94 419.417 150.46 414.277 147.91L414.197 130.64L421.767 130.41C432.277 130.09 441.697 124.15 446.267 114.52L274.537 114.58L35.5774 114.54C41.9274 127.42 53.1774 131.18 66.9074 130.74L66.9274 147.69C61.4974 150 58.5574 154.96 58.7774 160.43C58.9874 165.69 62.3474 170.41 67.7374 172.1L52.6174 227.89L15.7174 359.74L6.10742 393.93L14.4574 393.83L43.6974 289.46L72.0574 183.34" fill="currentColor" />
+    <path d="M111.437 449.9C73.9272 469.25 21.4272 459.38 3.65722 418.64C0.927223 412.38 -0.152784 405.97 0.0172161 399.48L144.227 399.43C145.277 419.7 129.197 440.74 111.427 449.9H111.437Z" fill="currentColor" />
+    <path d="M476.987 421.71C469.427 437.1 456.487 448.35 440.227 454.16C405.027 466.75 361.917 456.94 343.657 422.55C339.847 415.37 337.447 408.06 337.567 399.47H473.367L481.917 399.27C482.187 407.17 480.547 414.47 476.987 421.71Z" fill="currentColor" />
+    <path d="M240.967 151.66C258.734 151.66 273.137 137.257 273.137 119.49C273.137 101.723 258.734 87.32 240.967 87.32C223.2 87.32 208.797 101.723 208.797 119.49C208.797 137.257 223.2 151.66 240.967 151.66Z" fill="currentColor" />
+    <path d="M240.737 0C244.647 0 247.827 3.18 247.827 7.09V104.94H234.107V6.62999C234.107 2.96999 237.077 0 240.737 0Z" fill="currentColor" />
+  </svg>
+)
+
+const BalanceIcon = ({ rocking = false, ...props }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M12 3v18" />
+    <path d="M8 21h8" />
+    <g className={rocking ? 'balance-beam' : ''} style={{ transformOrigin: '12px 7px' }}>
+      <path d="M4 7h16" />
+      <path d="M4 7 2 12a2.5 2.5 0 0 0 5 0L4 7Z" />
+      <path d="M20 7l-2 5a2.5 2.5 0 0 0 5 0l-3-5Z" />
+    </g>
+    <circle cx="12" cy="4.2" r="1.2" fill="currentColor" stroke="none" />
+  </svg>
+)
 
 function App() {
-  const sessionId = useSession()
+  useSession()
   const [count, setCount] = useSessionStorage('counter', 0)
+  const [matchedCount, setMatchedCount] = useState(0)
+  const [listening, setListening] = useState(false)
+  const [passed, setPassed] = useState(false)
+  const recognitionRef = useRef(null)
+
+  const [matchedCount2, setMatchedCount2] = useState(0)
+  const [listening2, setListening2] = useState(false)
+  const [revealed2, setRevealed2] = useState(false)
+  const [passed2, setPassed2] = useState(false)
+  const [escalate, setEscalate] = useState(false)
+  const recognitionRef2 = useRef(null)
+
+  useEffect(() => {
+    if (!passed2) return
+    const timer = setTimeout(() => setEscalate(true), 15000)
+    return () => clearTimeout(timer)
+  }, [passed2])
+
+  const listen = ({ requiredTokens, setListening, setMatchedCount, onDone }) => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    if (!SpeechRecognition) {
+      alert('Riconoscimento vocale non supportato su questo browser (serve Chrome o Edge).')
+      return
+    }
+    const isSecure = window.isSecureContext || location.hostname === 'localhost'
+    if (!isSecure) {
+      alert('Il riconoscimento vocale richiede HTTPS (o localhost). Apri il sito in https.')
+      return
+    }
+    const recognition = new SpeechRecognition()
+    recognition.lang = 'it-IT'
+    recognition.interimResults = true
+    recognition.continuous = false
+
+    let done = false
+    let matched = 0
+
+    recognition.onresult = (event) => {
+      let transcript = ''
+      for (let i = 0; i < event.results.length; i++) {
+        transcript += ` ${event.results[i][0].transcript}`
+      }
+      const blob = normalize(transcript)
+      let count = 0
+      let searchFrom = 0
+      for (const word of requiredTokens) {
+        const idx = blob.indexOf(word, searchFrom)
+        if (idx === -1) break
+        searchFrom = idx + word.length
+        count++
+      }
+      matched = count
+      setMatchedCount(count)
+      if (count === requiredTokens.length) {
+        done = true
+        onDone()
+        recognition.stop()
+      }
+    }
+    recognition.onend = () => {
+      if (!done && matched < requiredTokens.length) {
+        recognition.start()
+      } else {
+        setListening(false)
+      }
+    }
+    recognition.onerror = (event) => {
+      if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+        done = true
+        setListening(false)
+        alert('Permesso microfono negato. Consenti l\'accesso al microfono nelle impostazioni del browser.')
+      } else if (event.error !== 'no-speech' && event.error !== 'aborted') {
+        done = true
+        setListening(false)
+        alert(`Errore riconoscimento vocale: ${event.error}`)
+      }
+    }
+
+    setListening(true)
+    setMatchedCount(0)
+    recognition.start()
+    return recognition
+  }
+
+  const startListening = () => {
+    recognitionRef.current = listen({
+      requiredTokens: REQUIRED_TOKENS,
+      setListening,
+      setMatchedCount,
+      onDone: () => setPassed(true),
+    })
+  }
+
+  const startListening2 = () => {
+    setRevealed2(true)
+    recognitionRef2.current = listen({
+      requiredTokens: REQUIRED_TOKENS_2,
+      setListening: setListening2,
+      setMatchedCount: setMatchedCount2,
+      onDone: () => setPassed2(true),
+    })
+  }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-4 bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-100 px-4 text-center">
-      <h1 className="text-3xl font-medium">Your session</h1>
-      <p className="text-sm text-neutral-500 font-mono break-all">{sessionId}</p>
-      <p className="text-sm text-neutral-500">
-        This id lives only in your browser. Nobody else scanning the same QR
-        code shares it or anything you do here.
-      </p>
-      <button
-        type="button"
-        onClick={() => setCount((c) => c + 1)}
-        className="mt-4 rounded-lg bg-violet-600 px-4 py-2 text-white hover:bg-violet-700"
+    <main className="relative min-h-screen bg-black overflow-hidden">
+      <div
+        className="absolute top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '38rem',
+          background: `
+            radial-gradient(ellipse 70% 50% at 50% 100%, rgba(230,185,90,0.7), rgba(230,185,90,0) 65%),
+            radial-gradient(ellipse 120% 40% at 50% 0%, rgba(0,0,0,0.35), rgba(0,0,0,0) 70%),
+            linear-gradient(to bottom, #3A2A02, #B8860B)
+          `,
+        }}
+      />
+      <div
+        className="absolute inset-0 bg-black transition-opacity duration-[1500ms] pointer-events-none"
+        style={{ opacity: passed ? 1 : 0 }}
+      />
+      <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
+        <div
+          className="w-full max-w-md -mb-32 transition-transform duration-[1500ms] ease-in"
+          style={{
+            transform: passed ? 'scale(6)' : 'scale(1)',
+            transformOrigin: 'bottom center',
+            transitionDelay: passed ? '400ms' : '0ms',
+            zIndex: 20,
+          }}
+        >
+          <Head />
+        </div>
+        <button
+          type="button"
+          onClick={() => setCount((c) => c + 1)}
+          aria-label={`count ${count}`}
+          className="w-full transition-transform duration-[1500ms] ease-in"
+          style={{
+            transform: passed ? 'translateY(100%)' : 'translateY(0)',
+            transitionDelay: passed ? '400ms' : '0ms',
+          }}
+        >
+          <Body />
+        </button>
+      </div>
+      <div
+        className="absolute bottom-0 pointer-events-none transition-transform duration-[1200ms] ease-in"
+        style={{
+          left: '-30%',
+          right: '-30%',
+          height: '9rem',
+          transform: passed ? 'translateY(200%)' : 'translateY(0)',
+          mixBlendMode: 'screen',
+          background: 'radial-gradient(ellipse at bottom, rgba(183,134,12,0.55), rgba(183,134,12,0) 70%)',
+        }}
+      />
+      <div
+        className="absolute bottom-24 left-0 right-0 z-10 flex flex-col items-center"
+        style={{
+          transform: passed ? 'translateY(200%)' : 'translateY(0)',
+          opacity: passed ? 0 : 1,
+          transition: 'transform 1200ms ease-in, opacity 600ms ease-in',
+          transitionDelay: passed ? '0ms, 400ms' : '0ms, 0ms',
+        }}
       >
-        Your count: {count}
-      </button>
+        <p style={{ fontSize: 16, color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
+        <p
+          className="px-8 text-center"
+          style={{ fontSize: 38, lineHeight: 1.1, fontWeight: 300, fontStyle: 'italic' }}
+        >
+          {PHRASE_WORDS.map((word, i) => (
+            <span key={i}>
+              {word === 'giudice' && <br />}
+              <span
+                className="transition-colors duration-200"
+                style={{ color: CUMULATIVE_REQUIRED[i] <= matchedCount ? '#B8860B' : '#D8D8D8' }}
+              >
+                {word}
+              </span>{' '}
+            </span>
+          ))}
+        </p>
+        <button
+          type="button"
+          aria-label="audio"
+          onClick={startListening}
+          className="flex items-center justify-center rounded-full"
+          style={{
+            width: 48,
+            height: 48,
+            marginTop: 40,
+            backgroundColor: listening ? '#C89A2E' : '#B8860B',
+          }}
+        >
+          {listening ? (
+            <div className="flex items-center justify-center gap-1.5">
+              <span className="voice-bar" style={{ height: 10, animationDelay: '0ms' }} />
+              <span className="voice-bar" style={{ height: 18, animationDelay: '250ms' }} />
+              <span className="voice-bar" style={{ height: 10, animationDelay: '500ms' }} />
+            </div>
+          ) : (
+            <svg viewBox="0 0 24 24" width={22} height={22} fill="black">
+              <path d="M3 9v6h4l5 5V4L7 9H3z" />
+              <path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z" />
+            </svg>
+          )}
+        </button>
+      </div>
+      <div
+        className="force-landscape absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-8 py-4 overflow-y-auto"
+        style={{
+          opacity: passed ? 1 : 0,
+          pointerEvents: passed ? 'auto' : 'none',
+          transition: 'opacity 800ms ease-in',
+          transitionDelay: passed ? '1900ms' : '0ms',
+        }}
+      >
+      <div
+        className="absolute bottom-0 pointer-events-none"
+        style={{
+          left: '-10%',
+          right: '-10%',
+          top: '-30%',
+          height: '160%',
+          mixBlendMode: 'screen',
+          background: 'radial-gradient(ellipse at bottom, rgba(183,134,12,0.55), rgba(183,134,12,0) 70%)',
+        }}
+      />
+      <div className="grid" style={{ placeItems: 'center' }}>
+      <div
+        className="flex flex-col items-center rotate-in-hint"
+        style={{
+          gridArea: '1 / 1',
+          opacity: passed2 ? 0 : 1,
+          transform: passed2 ? 'scale(1.15)' : 'scale(1)',
+          filter: passed2 ? 'blur(14px)' : 'blur(0px)',
+          transition: 'opacity 700ms ease, transform 900ms ease, filter 700ms ease',
+          pointerEvents: passed2 ? 'none' : 'auto',
+        }}
+      >
+        <AnubiIcon style={{ width: 'clamp(36px, 7vh, 64px)', height: 'auto', color: '#B8860B' }} />
+        <div className="grid" style={{ placeItems: 'center', marginTop: 'clamp(16px, 4vh, 32px)' }}>
+          <p
+            className="max-w-3xl text-center"
+            style={{
+              gridArea: '1 / 1',
+              fontSize: 'clamp(20px, 5vh, 38px)',
+              lineHeight: 1.1,
+              fontWeight: 300,
+              fontStyle: 'italic',
+              color: '#D8D8D8',
+              opacity: revealed2 ? 0 : 1,
+              transform: revealed2 ? 'scale(0.92) translateY(-6px)' : 'scale(1) translateY(0)',
+              filter: revealed2 ? 'blur(4px)' : 'blur(0px)',
+              transition: 'opacity 500ms ease, transform 500ms ease, filter 500ms ease',
+              pointerEvents: revealed2 ? 'none' : 'auto',
+            }}
+          >
+            Affidi il tuo giudizio<br />nelle mani di Anubi?
+          </p>
+          <div
+            className="flex flex-col items-center"
+            style={{
+              gridArea: '1 / 1',
+              opacity: revealed2 ? 1 : 0,
+              transform: revealed2 ? 'scale(1) translateY(0)' : 'scale(0.92) translateY(6px)',
+              filter: revealed2 ? 'blur(0px)' : 'blur(4px)',
+              transition: 'opacity 550ms ease, transform 550ms ease, filter 550ms ease',
+              transitionDelay: revealed2 ? '150ms' : '0ms',
+              pointerEvents: revealed2 ? 'auto' : 'none',
+            }}
+          >
+            <p style={{ fontSize: 'clamp(12px, 2.5vh, 16px)', color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
+            <p
+              className="max-w-3xl text-center"
+              style={{ fontSize: 'clamp(20px, 5vh, 38px)', lineHeight: 1.1, fontWeight: 300, fontStyle: 'italic' }}
+            >
+              {PHRASE2_WORDS.map((word, i) => (
+                <span key={i}>
+                  <span
+                    className="transition-colors duration-200"
+                    style={{ color: CUMULATIVE_REQUIRED_2[i] <= matchedCount2 ? '#B8860B' : '#D8D8D8' }}
+                  >
+                    {word}
+                  </span>{' '}
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          aria-label="audio"
+          onClick={startListening2}
+          className="flex items-center justify-center rounded-full"
+          style={{
+            width: 'clamp(36px, 8vh, 48px)',
+            height: 'clamp(36px, 8vh, 48px)',
+            marginTop: 'clamp(20px, 4vh, 40px)',
+            backgroundColor: listening2 ? '#C89A2E' : '#B8860B',
+          }}
+        >
+          {listening2 ? (
+            <div className="flex items-center justify-center gap-1.5">
+              <span className="voice-bar" style={{ height: 10, animationDelay: '0ms' }} />
+              <span className="voice-bar" style={{ height: 18, animationDelay: '250ms' }} />
+              <span className="voice-bar" style={{ height: 10, animationDelay: '500ms' }} />
+            </div>
+          ) : (
+            <svg viewBox="0 0 24 24" width={22} height={22} fill="black">
+              <path d="M3 9v6h4l5 5V4L7 9H3z" />
+              <path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z" />
+            </svg>
+          )}
+        </button>
+      </div>
+      <div
+        className="flex items-center justify-center"
+        style={{
+          gridArea: '1 / 1',
+          width: 'clamp(90px, 22vh, 140px)',
+          height: 'clamp(90px, 22vh, 140px)',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(184,134,11,0.35), rgba(184,134,11,0) 70%)',
+          opacity: passed2 ? 1 : 0,
+          transform: passed2 ? 'scale(1)' : 'scale(0.4)',
+          filter: passed2 ? 'blur(0px)' : 'blur(10px)',
+          transition: 'opacity 800ms ease-out, transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 800ms ease-out',
+          transitionDelay: passed2 ? '350ms' : '0ms',
+          pointerEvents: 'none',
+        }}
+      >
+        <BalanceIcon style={{ width: 'clamp(44px, 11vh, 72px)', height: 'auto', color: '#B8860B' }} />
+      </div>
+      </div>
+    </div>
+    {escalate && (
+      <div className="escalation-container force-landscape fixed inset-0 z-50">
+        <BalanceIcon className="escalation-svg" rocking />
+      </div>
+    )}
     </main>
   )
 }
