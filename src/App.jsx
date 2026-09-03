@@ -75,14 +75,14 @@ function App() {
 
   useEffect(() => {
     if (!passed2) return
-    const timer = setTimeout(() => setEscalate(true), 15000)
+    const timer = setTimeout(() => setEscalate(true), 11000)
     return () => clearTimeout(timer)
   }, [passed2])
 
-  // Post-glitch result screen holds for 5s, then fades out before the "embrace failure" phrase appears.
+  // Post-glitch result screen holds for 10s, then fades out before the "embrace failure" phrase appears.
   useEffect(() => {
     if (!result) return
-    const timer = setTimeout(() => setResultFadingOut(true), 5000)
+    const timer = setTimeout(() => setResultFadingOut(true), 10000)
     return () => clearTimeout(timer)
   }, [result])
 
@@ -112,8 +112,8 @@ function App() {
     setIntroKey((k) => k + 1)
   }, [passed3])
 
-  // Glitch + rocking run for 16s (beamRock/escalatingEnergy), settling on restTilt
-  // for the last 4s. Reveal the result screen once the balance has held still.
+  // Glitch + rocking run for 19s (beamRock/escalatingEnergy), settling on restTilt
+  // for the last 7s. Reveal the result screen once the balance has held still.
   useEffect(() => {
     if (!escalate) return
     const timer = setTimeout(() => {
@@ -126,7 +126,7 @@ function App() {
       } else {
         setResult({ Screen: LightResultScreen, data: LIGHT_SCREENS[Math.floor(Math.random() * LIGHT_SCREENS.length)] })
       }
-    }, 16000)
+    }, 19000)
     return () => clearTimeout(timer)
   }, [escalate, restTilt])
 
@@ -330,10 +330,10 @@ function App() {
       <div
         className="force-landscape absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-8 py-4 overflow-hidden"
         style={{
-          opacity: passed ? 1 : 0,
-          pointerEvents: passed ? 'auto' : 'none',
+          opacity: result || showEmbrace ? 0 : passed ? 1 : 0,
+          pointerEvents: result || showEmbrace ? 'none' : passed ? 'auto' : 'none',
           transition: 'opacity 800ms ease-in',
-          transitionDelay: passed ? '1900ms' : '0ms',
+          transitionDelay: passed && !result && !showEmbrace ? '1900ms' : '0ms',
         }}
       >
       <div
