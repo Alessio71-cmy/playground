@@ -292,7 +292,7 @@ function App() {
             rocking={escalate && finalTilt === null}
             tilt={escalate ? (finalTilt ?? undefined) : 0}
             onRockEnd={handleRockEnd}
-            style={{ width: 'clamp(44px, 11cqh, 72px)', height: 'auto', color: '#ffffff' }}
+            style={{ width: 'clamp(44px, calc(var(--sh) * 0.11), 72px)', height: 'auto', color: '#ffffff' }}
           />
         </div>
       ) : (
@@ -301,13 +301,13 @@ function App() {
         className="flex flex-col items-center rotate-in-hint"
         style={{ gridArea: '1 / 1' }}
       >
-        <AnubiIcon style={{ width: 'clamp(36px, 7cqh, 64px)', height: 'auto', color: '#B8860B' }} />
-        <div className="grid" style={{ placeItems: 'center', marginTop: 'clamp(16px, 4cqh, 32px)' }}>
+        <AnubiIcon style={{ width: 'clamp(36px, calc(var(--sh) * 0.07), 64px)', height: 'auto', color: '#B8860B' }} />
+        <div className="grid" style={{ placeItems: 'center', marginTop: 'clamp(16px, calc(var(--sh) * 0.04), 32px)' }}>
           <p
             className="max-w-3xl text-center"
             style={{
               gridArea: '1 / 1',
-              fontSize: 'clamp(20px, 5cqh, 38px)',
+              fontSize: 'clamp(20px, calc(var(--sh) * 0.05), 38px)',
               lineHeight: 1.1,
               fontWeight: 300,
               fontStyle: 'italic',
@@ -333,10 +333,10 @@ function App() {
               pointerEvents: revealed2 ? 'auto' : 'none',
             }}
           >
-            <p style={{ fontSize: 'clamp(12px, 2.5cqh, 16px)', color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
+            <p style={{ fontSize: 'clamp(12px, calc(var(--sh) * 0.025), 16px)', color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
             <p
               className="max-w-3xl text-center"
-              style={{ fontSize: 'clamp(20px, 5cqh, 38px)', lineHeight: 1.1, fontWeight: 300, fontStyle: 'italic' }}
+              style={{ fontSize: 'clamp(20px, calc(var(--sh) * 0.05), 38px)', lineHeight: 1.1, fontWeight: 300, fontStyle: 'italic' }}
             >
               {PHRASE2_WORDS.map((word, i) => (
                 <span key={i}>
@@ -357,9 +357,9 @@ function App() {
           onClick={startListening2}
           className="flex items-center justify-center rounded-full"
           style={{
-            width: 'clamp(36px, 8cqh, 48px)',
-            height: 'clamp(36px, 8cqh, 48px)',
-            marginTop: 'clamp(20px, 4cqh, 40px)',
+            width: 'clamp(36px, calc(var(--sh) * 0.08), 48px)',
+            height: 'clamp(36px, calc(var(--sh) * 0.08), 48px)',
+            marginTop: 'clamp(20px, calc(var(--sh) * 0.04), 40px)',
             backgroundColor: listening2 ? '#C89A2E' : '#B8860B',
           }}
         >
