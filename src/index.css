@@ -75,11 +75,11 @@ body {
   75%, 100% { transform: scale(1.9); }
 }
 
-.balance-beam {
-  animation: beamRock 16s 1 forwards;
+.escalation-rock {
+  animation: iconRock 16s 1 forwards;
 }
 
-@keyframes beamRock {
+@keyframes iconRock {
   0.00% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
   17.99% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
   27.65% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
