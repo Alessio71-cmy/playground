@@ -133,7 +133,10 @@ const LIGHT_SCREENS = [
 
 function ResultScreen({ Image, Icon, title, subtitle, line }) {
   return (
-    <div className="relative w-full h-dvh bg-black flex flex-col items-center justify-center px-8 text-center">
+    <div
+      className="relative w-full h-dvh bg-black flex flex-col items-center px-8 text-center"
+      style={{ paddingTop: 'clamp(48px, 13dvh, 120px)' }}
+    >
       <img
         src={Image}
         alt=""
@@ -175,8 +178,8 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
   const titleLines = Array.isArray(title) ? title : [title]
   return (
     <div
-      className="relative w-full h-dvh flex flex-col items-center justify-center px-8 text-center overflow-hidden"
-      style={{ backgroundColor: '#000000' }}
+      className="relative w-full h-dvh flex flex-col items-center px-8 text-center overflow-hidden"
+      style={{ backgroundColor: '#000000', paddingTop: 'clamp(48px, 13dvh, 120px)' }}
     >
       <div
         className="absolute inset-0 solemn-gradient"

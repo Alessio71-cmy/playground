@@ -238,6 +238,26 @@ body {
   to { opacity: 1; transform: scale(1); filter: blur(0); }
 }
 
+/* First screen: black hold, then the SVG rises a long way up from below, slowly and solemnly. */
+.intro-rise {
+  animation: introRise 2600ms linear 2000ms both;
+}
+
+@keyframes introRise {
+  from { opacity: 0; transform: translateY(40dvh); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* First screen: top and bottom glows fade in on the same slow timing as the SVG, so they arrive together. */
+.intro-glow {
+  animation: introGlow 2600ms linear 2000ms both;
+}
+
+@keyframes introGlow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Result reveal: light screens (6-8) rise from below, solemnly. */
 .solemn-rise {
   animation: solemnRise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
