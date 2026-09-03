@@ -292,7 +292,7 @@ function App() {
             rocking={escalate && finalTilt === null}
             tilt={escalate ? (finalTilt ?? undefined) : 0}
             onRockEnd={handleRockEnd}
-            style={{ width: 'clamp(44px, calc(var(--sh) * 0.11), 72px)', height: 'auto', color: '#ffffff' }}
+            style={{ width: 'clamp(72px, calc(var(--sh) * 0.2), 130px)', height: 'auto', color: '#ffffff' }}
           />
         </div>
       ) : (
@@ -307,7 +307,7 @@ function App() {
             className="max-w-3xl text-center"
             style={{
               gridArea: '1 / 1',
-              fontSize: 'clamp(20px, calc(var(--sh) * 0.05), 38px)',
+              fontSize: 38,
               lineHeight: 1.1,
               fontWeight: 300,
               fontStyle: 'italic',
@@ -333,10 +333,10 @@ function App() {
               pointerEvents: revealed2 ? 'auto' : 'none',
             }}
           >
-            <p style={{ fontSize: 'clamp(12px, calc(var(--sh) * 0.025), 16px)', color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
+            <p style={{ fontSize: 16, color: '#B8860B', marginBottom: 8 }}>Ripeti a voce alta</p>
             <p
               className="max-w-3xl text-center"
-              style={{ fontSize: 'clamp(20px, calc(var(--sh) * 0.05), 38px)', lineHeight: 1.1, fontWeight: 300, fontStyle: 'italic' }}
+              style={{ fontSize: 38, lineHeight: 1.1, fontWeight: 300, fontStyle: 'italic' }}
             >
               {PHRASE2_WORDS.map((word, i) => (
                 <span key={i}>
@@ -357,9 +357,9 @@ function App() {
           onClick={startListening2}
           className="flex items-center justify-center rounded-full"
           style={{
-            width: 'clamp(36px, calc(var(--sh) * 0.08), 48px)',
-            height: 'clamp(36px, calc(var(--sh) * 0.08), 48px)',
-            marginTop: 'clamp(20px, calc(var(--sh) * 0.04), 40px)',
+            width: 48,
+            height: 48,
+            marginTop: 40,
             backgroundColor: listening2 ? '#C89A2E' : '#B8860B',
           }}
         >

@@ -29,8 +29,8 @@ body {
 .force-landscape {
   width: 100%;
   height: 100%;
-  --sw: 100vw;
-  --sh: 100vh;
+  --sw: 100dvw;
+  --sh: 100dvh;
 }
 
 @media screen and (max-width: 900px) and (orientation: portrait) {
@@ -38,12 +38,12 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vh;
-    height: 100vw;
+    width: 100dvh;
+    height: 100dvw;
     transform: rotate(90deg) translateY(-100%);
     transform-origin: top left;
-    --sw: 100vh;
-    --sh: 100vw;
+    --sw: 100dvh;
+    --sh: 100dvw;
   }
 }
 
