@@ -30,6 +30,29 @@ body {
   animation: escalatingEnergy 16s ease-in-out 1 forwards;
 }
 
+/* Screens 2 and 3 (judgment question + glitch) are the only ones designed landscape: force it always. */
+.force-landscape {
+  width: 100%;
+  height: 100%;
+  --sw: 100dvw;
+  --sh: 100dvh;
+}
+
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  .force-landscape {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100lvh;
+    height: 100lvw;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+    --sw: 100lvh;
+    --sh: 100lvw;
+  }
+}
+
+/* Every other screen is portrait-only: force it always. */
 .force-portrait {
   width: 100%;
   height: 100%;

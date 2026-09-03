@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSession, useSessionStorage } from './session/SessionContext.jsx'
 import { Figure } from './components/SplashArt.jsx'
 import { SCREENS, LIGHT_SCREENS, ResultScreen, LightResultScreen } from './components/ResultScreens.jsx'
@@ -226,7 +226,7 @@ function App() {
 
   return (
     <main className="relative min-h-dvh bg-black overflow-hidden">
-      <Fragment key={introKey}>
+      <div key={introKey} className="force-portrait absolute inset-0">
       <div
         className="absolute top-0 left-0 right-0 pointer-events-none intro-glow"
         style={{
@@ -326,9 +326,9 @@ function App() {
           )}
         </button>
       </div>
-      </Fragment>
+      </div>
       <div
-        className="force-portrait absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-8 py-4 overflow-hidden"
+        className="force-landscape absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-8 py-4 overflow-hidden"
         style={{
           opacity: passed ? 1 : 0,
           pointerEvents: passed ? 'auto' : 'none',
@@ -440,7 +440,7 @@ function App() {
     </div>
     {result && (
       <div
-        className="absolute inset-0 z-40 transition-opacity duration-[800ms] ease-in"
+        className="force-portrait absolute inset-0 z-40 transition-opacity duration-[800ms] ease-in"
         style={{ opacity: resultFadingOut ? 0 : 1, pointerEvents: resultFadingOut ? 'none' : 'auto' }}
       >
         <result.Screen {...result.data} />
@@ -448,7 +448,7 @@ function App() {
     )}
     {showEmbrace && (
       <div
-        className="absolute inset-0 z-40 flex flex-col items-center justify-center text-center px-8"
+        className="force-portrait absolute inset-0 z-40 flex flex-col items-center justify-center text-center px-8"
         style={{ backgroundColor: '#000000' }}
       >
         <p style={{ fontSize: 16, color: '#B8860B', marginBottom: 8 }}>Ripeti ad alta voce</p>

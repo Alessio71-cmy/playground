@@ -174,6 +174,10 @@ function ResultScreen({ Image, Icon, title, subtitle, line }) {
   )
 }
 
+// Reserved title height (7 lines, the tallest of the light-screen titles) so the figure
+// below always starts at the same offset, regardless of how many lines a given title wraps to.
+const LIGHT_TITLE_MIN_HEIGHT = 38 * 1.1 * 7
+
 function LightResultScreen({ Icon, title, subtitle, line }) {
   const titleLines = Array.isArray(title) ? title : [title]
   return (
@@ -188,6 +192,7 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
       <p
         className="relative max-w-3xl solemn-rise"
         style={{
+          minHeight: LIGHT_TITLE_MIN_HEIGHT,
           fontSize: 38,
           lineHeight: 1.1,
           fontWeight: 300,
