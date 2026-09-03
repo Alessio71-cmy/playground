@@ -21,7 +21,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100dvh;
+  height: 100%;
   background-color: #000000;
   animation: escalatingEnergy 16s ease-in-out 1 forwards;
 }
@@ -29,6 +29,7 @@ body {
 .force-landscape {
   width: 100%;
   height: 100%;
+  container-type: size;
 }
 
 @media screen and (max-width: 900px) and (orientation: portrait) {
@@ -54,7 +55,7 @@ body {
 }
 
 .escalation-svg {
-  width: clamp(50px, min(15vw, 20vh), 150px);
+  width: clamp(50px, min(15cqw, 20cqh), 150px);
   height: auto;
   color: #ffffff;
   mix-blend-mode: difference;
