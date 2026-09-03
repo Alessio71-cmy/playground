@@ -186,7 +186,7 @@ function App() {
       />
       <div
         className="absolute left-0 right-0 w-full flex flex-col items-center overflow-visible"
-        style={{ top: 'max(2rem, 6dvh)' }}
+        style={{ top: 'max(1rem, 3dvh)' }}
       >
         <button
           type="button"
@@ -214,7 +214,7 @@ function App() {
         }}
       />
       <div
-        className="absolute bottom-24 left-0 right-0 z-10 flex flex-col items-center"
+        className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center pb-4 sm:pb-8"
         style={{
           transform: passed ? 'translateY(200%)' : 'translateY(0)',
           opacity: passed ? 0 : 1,
