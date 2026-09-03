@@ -60,8 +60,7 @@ function App() {
   const [revealed2, setRevealed2] = useState(false)
   const [passed2, setPassed2] = useState(false)
   const [escalate, setEscalate] = useState(false)
-  // TEMP (this test session only): force center tilt so the glitch always settles on the light result screens (5/6/7). Revert to random after testing.
-  const pickTilt = () => 0
+  const pickTilt = () => [-24, 0, 24][Math.floor(Math.random() * 3)]
   const [restTilt, setRestTilt] = useState(pickTilt)
   const [result, setResult] = useState(null)
   const recognitionRef2 = useRef(null)
@@ -81,9 +80,10 @@ function App() {
   }, [passed2])
 
   // Post-glitch result screen holds for 5s, then fades out before the "embrace failure" phrase appears.
-  // TEMP (this test session only): disabled so the flow stops on the result screen. Revert after testing.
   useEffect(() => {
     if (!result) return
+    const timer = setTimeout(() => setResultFadingOut(true), 5000)
+    return () => clearTimeout(timer)
   }, [result])
 
   useEffect(() => {

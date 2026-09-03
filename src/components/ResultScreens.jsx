@@ -118,14 +118,14 @@ const LIGHT_SCREENS = [
   {
     key: 'balance',
     Icon: img1,
-    title: 'Inaspettato... Se continui ad impegnarti potresti raggiungere la mediocrità perfetta',
+    title: 'Inaspettato... Potresti raggiungere la mediocrità perfetta',
     subtitle: ['Saldo mese di Agosto'],
     line: '-125 €',
   },
   {
     key: 'scroll2',
     Icon: img2,
-    title: ['Mmmm...', 'Sei un buon adepto', 'Abbraccia la tua mediocrità', ' e sii fiero'],
+    title: ['Mmmm...', 'Sei un buon adepto', 'Sii fiero della tua mediocrità'],
     subtitle: ['Utilizzo giornaliero dei Social'],
     line: '1,5 ore',
   },
