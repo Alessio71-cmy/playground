@@ -177,49 +177,48 @@ function ResultScreen({ Image, Icon, title, subtitle, line }) {
 function LightResultScreen({ Icon, title, subtitle, line }) {
   const titleLines = Array.isArray(title) ? title : [title]
   return (
-    <div
-      className="relative w-full h-dvh flex flex-col items-center px-8 text-center overflow-hidden"
-      style={{ backgroundColor: '#000000', paddingTop: 'clamp(48px, 13dvh, 120px)' }}
-    >
+    <div className="relative w-full h-dvh overflow-hidden text-center" style={{ backgroundColor: '#000000' }}>
       <div
         className="absolute inset-0 solemn-gradient"
         style={{ background: 'linear-gradient(to bottom, #B8860B, #FFFFFF)', animationDelay: '0ms' }}
       />
+      {/* Full-bleed background figure, positioned exactly like the unlock screen's Figure. */}
       <Figure
         mainColor="#ffffff"
-        className="relative solemn-rise"
-        style={{ width: 'clamp(90px, 19dvh, 150px)', height: 'auto', flexShrink: 0, animationDelay: '0ms' }}
+        className="absolute left-0 right-0 w-full solemn-rise"
+        style={{ top: 'max(2rem, 6dvh)', height: 'auto', animationDelay: '0ms' }}
       />
-      <p
-        className="relative max-w-3xl solemn-rise"
-        style={{
-          marginTop: 'clamp(12px, 3dvh, 24px)',
-          fontSize: 38,
-          lineHeight: 1.1,
-          fontWeight: 300,
-          fontStyle: 'italic',
-          color: GOLD,
-          animationDelay: '150ms',
-        }}
-      >
-        {titleLines.map((l, i) => (
-          <span key={i}>
-            {l}
-            {i < titleLines.length - 1 && <br />}
-          </span>
-        ))}
-      </p>
-      <div className="relative flex flex-col items-center" style={{ marginTop: 'clamp(12px, 3dvh, 24px)' }}>
-        <div className="solemn-rise" style={{ animationDelay: '300ms' }}>
-          {subtitle.map((s, i) => (
-            <p key={i} style={{ fontSize: 14, color: GOLD, marginTop: i === 0 ? 0 : 4 }}>
-              {s}
-            </p>
+      <div className="relative flex flex-col items-center px-8" style={{ paddingTop: 'clamp(330px, 52dvh, 460px)' }}>
+        <p
+          className="max-w-3xl solemn-rise"
+          style={{
+            fontSize: 38,
+            lineHeight: 1.1,
+            fontWeight: 300,
+            fontStyle: 'italic',
+            color: GOLD,
+            animationDelay: '150ms',
+          }}
+        >
+          {titleLines.map((l, i) => (
+            <span key={i}>
+              {l}
+              {i < titleLines.length - 1 && <br />}
+            </span>
           ))}
-        </div>
-        <div className="flex items-center solemn-rise" style={{ gap: 4, marginTop: 4, animationDelay: '450ms' }}>
-          <Icon style={{ width: 22, height: 22, color: GOLD }} />
-          <span style={{ fontSize: 22, color: GOLD }}>{line}</span>
+        </p>
+        <div className="flex flex-col items-center" style={{ marginTop: 'clamp(8px, 2dvh, 16px)' }}>
+          <div className="solemn-rise" style={{ animationDelay: '300ms' }}>
+            {subtitle.map((s, i) => (
+              <p key={i} style={{ fontSize: 14, color: GOLD, marginTop: i === 0 ? 0 : 4 }}>
+                {s}
+              </p>
+            ))}
+          </div>
+          <div className="flex items-center solemn-rise" style={{ gap: 4, marginTop: 4, animationDelay: '450ms' }}>
+            <Icon style={{ width: 22, height: 22, color: GOLD }} />
+            <span style={{ fontSize: 22, color: GOLD }}>{line}</span>
+          </div>
         </div>
       </div>
     </div>
