@@ -275,14 +275,11 @@ function App() {
         }}
       >
       <div
-        className="absolute bottom-0 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
-          left: '-10%',
-          right: '-10%',
-          top: '-30%',
-          height: '160%',
+          inset: '-20%',
           mixBlendMode: 'screen',
-          background: 'radial-gradient(ellipse at bottom, rgba(183,134,12,0.55), rgba(183,134,12,0) 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(183,134,12,0.55), rgba(183,134,12,0) 70%)',
         }}
       />
       {passed2 ? (

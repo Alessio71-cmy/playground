@@ -72,7 +72,7 @@ body {
 }
 
 .balance-beam {
-  animation: beamRock 16s 1 forwards;
+  animation: beamRock 12s 1 forwards;
 }
 
 @keyframes beamRock {
