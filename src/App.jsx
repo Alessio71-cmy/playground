@@ -94,7 +94,7 @@ function App() {
       for (let i = 0; i < event.results.length; i++) {
         transcript += ` ${event.results[i][0].transcript}`
       }
-      const blob = normalize(transcript)
+      const blob = normalize(transcript).replace(/\s+/g, '')
       let count = 0
       let searchFrom = 0
       for (const word of requiredTokens) {
@@ -156,7 +156,7 @@ function App() {
   }
 
   return (
-    <main className="relative min-h-screen bg-black overflow-hidden">
+    <main className="relative min-h-dvh bg-black overflow-hidden">
       <div
         className="absolute top-0 left-0 right-0 pointer-events-none"
         style={{
