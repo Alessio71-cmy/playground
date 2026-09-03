@@ -27,7 +27,7 @@ body {
   justify-content: center;
   height: 100%;
   background-color: #000000;
-  animation: escalatingEnergy 19s ease-in-out 1 forwards;
+  animation: escalatingEnergy 18s ease-in-out 1 forwards;
 }
 
 /* Screens 2 and 3 (judgment question + glitch) are the only ones designed landscape: force it always. */
@@ -89,166 +89,166 @@ body {
   height: auto;
   color: #ffffff;
   mix-blend-mode: difference;
-  animation: escalatingScale 19s ease-in 1 forwards;
+  animation: escalatingScale 18s ease-in 1 forwards;
 }
 
-/* Glitch runs over the first 12s; last 7s is a held black stop. */
+/* Glitch runs over the first 12s; last 6s is a held black stop. */
 @keyframes escalatingScale {
-  0.00%, 50.53% { transform: scale(1); }
-  63.16%, 100% { transform: scale(1.9); }
+  0.00%, 53.34% { transform: scale(1); }
+  66.67%, 100% { transform: scale(1.9); }
 }
 
 .escalation-rock {
-  animation: iconRock 19s 1 forwards;
+  animation: iconRock 18s 1 forwards;
 }
 
 @keyframes iconRock {
   0.00% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  15.15% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  23.28% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  26.75% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  29.31% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  31.17% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  32.94% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  34.10% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  35.23% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  36.34% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  37.43% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  38.49% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  39.55% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  40.59% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  41.60% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  42.60% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  43.60% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  44.57% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  45.53% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  46.48% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  47.43% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  48.35% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  49.27% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  50.18% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  50.63% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  51.07% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  51.52% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  51.96% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  52.40% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  52.83% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  53.27% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  53.71% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  54.14% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  54.57% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  55.00% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  55.42% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  55.84% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  56.27% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  56.68% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  56.89% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  57.10% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  57.31% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  57.52% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  57.73% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  57.94% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  58.14% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  58.34% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  58.55% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  58.75% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  58.96% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  59.17% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  59.37% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  59.57% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  59.77% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  59.97% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  60.18% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  60.38% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  60.58% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  60.78% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  60.98% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  61.18% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  61.38% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  61.57% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  61.78% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  61.98% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  62.17% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  62.37% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  62.57% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  62.76% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
-  62.96% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
-  63.16%, 100.00% { transform: rotate(var(--final-tilt, 24deg)); animation-timing-function: ease-in-out; }
+  15.99% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  24.57% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  28.24% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  30.94% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  32.90% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  34.77% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  35.99% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  37.19% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  38.36% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  39.51% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  40.63% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  41.75% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  42.85% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  43.91% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  44.97% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  46.02% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  47.05% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  48.06% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  49.06% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  50.06% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  51.04% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  52.01% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  52.97% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  53.44% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  53.91% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  54.38% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  54.85% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  55.31% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  55.77% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  56.23% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  56.69% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  57.15% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  57.60% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  58.06% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  58.50% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  58.94% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  59.40% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  59.83% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  60.05% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  60.27% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  60.49% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  60.72% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  60.94% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  61.16% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  61.37% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  61.58% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  61.80% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  62.01% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  62.24% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  62.46% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  62.67% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  62.88% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  63.09% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  63.30% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  63.52% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  63.73% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  63.95% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  64.16% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  64.37% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  64.58% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  64.79% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  64.99% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  65.21% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  65.42% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  65.62% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  65.83% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  66.05% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  66.25% { transform: rotate(24deg); animation-timing-function: ease-in-out; }
+  66.46% { transform: rotate(-24deg); animation-timing-function: ease-in-out; }
+  66.67%, 100.00% { transform: rotate(var(--final-tilt, 24deg)); animation-timing-function: ease-in-out; }
 }
 
-/* Glitch runs over the first 12s; last 7s is a held black stop. */
+/* Glitch runs over the first 12s; last 6s is a held black stop. */
 @keyframes escalatingEnergy {
   0.00% { background-color: #000000; }
-  15.15% { background-color: #ffffff; }
-  23.28% { background-color: #000000; }
-  26.75% { background-color: #cccccc; }
-  29.31% { background-color: #000000; }
-  31.17% { background-color: #ffffff; }
-  32.94% { background-color: #111111; }
-  34.10% { background-color: #ffffff; }
-  35.23% { background-color: #000000; }
-  36.34% { background-color: #eeeeee; }
-  37.43% { background-color: #000000; }
-  38.49% { background-color: #ffffff; }
-  39.55% { background-color: #222222; }
-  40.59% { background-color: #ffffff; }
-  41.60% { background-color: #000000; }
-  42.60% { background-color: #dddddd; }
-  43.60% { background-color: #000000; }
-  44.57% { background-color: #ffffff; }
-  45.53% { background-color: #111111; }
-  46.48% { background-color: #ffffff; }
-  47.43% { background-color: #000000; }
-  48.35% { background-color: #ffffff; }
-  49.27% { background-color: #222222; }
-  50.18% { background-color: #000000; }
-  50.63% { background-color: #ffffff; }
-  51.07% { background-color: #000000; }
-  51.52% { background-color: #eeeeee; }
-  51.96% { background-color: #000000; }
-  52.40% { background-color: #ffffff; }
-  52.83% { background-color: #111111; }
-  53.27% { background-color: #ffffff; }
-  53.71% { background-color: #000000; }
-  54.14% { background-color: #dddddd; }
-  54.57% { background-color: #000000; }
-  55.00% { background-color: #ffffff; }
-  55.42% { background-color: #222222; }
-  55.84% { background-color: #ffffff; }
-  56.27% { background-color: #000000; }
-  56.68% { background-color: #ffffff; }
-  56.89% { background-color: #111111; }
-  57.10% { background-color: #ffffff; }
-  57.31% { background-color: #000000; }
-  57.52% { background-color: #ffffff; }
-  57.73% { background-color: #222222; }
-  57.94% { background-color: #ffffff; }
-  58.14% { background-color: #000000; }
-  58.34% { background-color: #eeeeee; }
-  58.55% { background-color: #000000; }
-  58.75% { background-color: #ffffff; }
-  58.96% { background-color: #111111; }
-  59.17% { background-color: #ffffff; }
-  59.37% { background-color: #000000; }
-  59.57% { background-color: #ffffff; }
-  59.77% { background-color: #222222; }
-  59.97% { background-color: #ffffff; }
-  60.18% { background-color: #000000; }
-  60.38% { background-color: #dddddd; }
-  60.58% { background-color: #000000; }
-  60.78% { background-color: #ffffff; }
-  60.98% { background-color: #111111; }
-  61.18% { background-color: #ffffff; }
-  61.38% { background-color: #000000; }
-  61.57% { background-color: #ffffff; }
-  61.78% { background-color: #222222; }
-  61.98% { background-color: #ffffff; }
-  62.17% { background-color: #000000; }
-  62.37% { background-color: #eeeeee; }
-  62.57% { background-color: #000000; }
-  62.76% { background-color: #ffffff; }
-  62.96% { background-color: #111111; }
-  63.16%, 100.00% { background-color: #000000; }
+  15.99% { background-color: #ffffff; }
+  24.57% { background-color: #000000; }
+  28.24% { background-color: #cccccc; }
+  30.94% { background-color: #000000; }
+  32.90% { background-color: #ffffff; }
+  34.77% { background-color: #111111; }
+  35.99% { background-color: #ffffff; }
+  37.19% { background-color: #000000; }
+  38.36% { background-color: #eeeeee; }
+  39.51% { background-color: #000000; }
+  40.63% { background-color: #ffffff; }
+  41.75% { background-color: #222222; }
+  42.85% { background-color: #ffffff; }
+  43.91% { background-color: #000000; }
+  44.97% { background-color: #dddddd; }
+  46.02% { background-color: #000000; }
+  47.05% { background-color: #ffffff; }
+  48.06% { background-color: #111111; }
+  49.06% { background-color: #ffffff; }
+  50.06% { background-color: #000000; }
+  51.04% { background-color: #ffffff; }
+  52.01% { background-color: #222222; }
+  52.97% { background-color: #000000; }
+  53.44% { background-color: #ffffff; }
+  53.91% { background-color: #000000; }
+  54.38% { background-color: #eeeeee; }
+  54.85% { background-color: #000000; }
+  55.31% { background-color: #ffffff; }
+  55.77% { background-color: #111111; }
+  56.23% { background-color: #ffffff; }
+  56.69% { background-color: #000000; }
+  57.15% { background-color: #dddddd; }
+  57.60% { background-color: #000000; }
+  58.06% { background-color: #ffffff; }
+  58.50% { background-color: #222222; }
+  58.94% { background-color: #ffffff; }
+  59.40% { background-color: #000000; }
+  59.83% { background-color: #ffffff; }
+  60.05% { background-color: #111111; }
+  60.27% { background-color: #ffffff; }
+  60.49% { background-color: #000000; }
+  60.72% { background-color: #ffffff; }
+  60.94% { background-color: #222222; }
+  61.16% { background-color: #ffffff; }
+  61.37% { background-color: #000000; }
+  61.58% { background-color: #eeeeee; }
+  61.80% { background-color: #000000; }
+  62.01% { background-color: #ffffff; }
+  62.24% { background-color: #111111; }
+  62.46% { background-color: #ffffff; }
+  62.67% { background-color: #000000; }
+  62.88% { background-color: #ffffff; }
+  63.09% { background-color: #222222; }
+  63.30% { background-color: #ffffff; }
+  63.52% { background-color: #000000; }
+  63.73% { background-color: #dddddd; }
+  63.95% { background-color: #000000; }
+  64.16% { background-color: #ffffff; }
+  64.37% { background-color: #111111; }
+  64.58% { background-color: #ffffff; }
+  64.79% { background-color: #000000; }
+  64.99% { background-color: #ffffff; }
+  65.21% { background-color: #222222; }
+  65.42% { background-color: #ffffff; }
+  65.62% { background-color: #000000; }
+  65.83% { background-color: #eeeeee; }
+  66.05% { background-color: #000000; }
+  66.25% { background-color: #ffffff; }
+  66.46% { background-color: #111111; }
+  66.67%, 100.00% { background-color: #000000; }
 }
 
 /* Result reveal: dark screens (1-5) fade in "magically" in place. */

@@ -75,7 +75,7 @@ function App() {
 
   useEffect(() => {
     if (!passed2) return
-    const timer = setTimeout(() => setEscalate(true), 11000)
+    const timer = setTimeout(() => setEscalate(true), 8000)
     return () => clearTimeout(timer)
   }, [passed2])
 
@@ -112,8 +112,8 @@ function App() {
     setIntroKey((k) => k + 1)
   }, [passed3])
 
-  // Glitch + rocking run for 19s (beamRock/escalatingEnergy), settling on restTilt
-  // for the last 7s. Reveal the result screen once the balance has held still.
+  // Glitch + rocking run for 18s (beamRock/escalatingEnergy), settling on restTilt
+  // for the last 6s. Reveal the result screen once the balance has held still.
   useEffect(() => {
     if (!escalate) return
     const timer = setTimeout(() => {
@@ -126,7 +126,7 @@ function App() {
       } else {
         setResult({ Screen: LightResultScreen, data: LIGHT_SCREENS[Math.floor(Math.random() * LIGHT_SCREENS.length)] })
       }
-    }, 19000)
+    }, 18000)
     return () => clearTimeout(timer)
   }, [escalate, restTilt])
 
