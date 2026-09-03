@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSession, useSessionStorage } from './session/SessionContext.jsx'
-import { Head, Body } from './components/SplashArt.jsx'
+import { Figure } from './components/SplashArt.jsx'
 
 const PHRASE_WORDS = ['Il', 'mio', 'unico', 'giudice', 'è', 'Anubi!']
 const PHRASE2_WORDS = ['Anubi,', 'ti', 'affido', 'il', 'giudizio']
@@ -36,11 +36,18 @@ const AnubiIcon = (props) => (
   </svg>
 )
 
-const BalanceIcon = ({ rocking = false, ...props }) => (
+const BalanceIcon = ({ rocking = false, tilt, onRockEnd, ...props }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M12 3v18" />
     <path d="M8 21h8" />
-    <g className={rocking ? 'balance-beam' : ''} style={{ transformOrigin: '12px 7px' }}>
+    <g
+      className={rocking ? 'balance-beam' : ''}
+      style={{
+        transformOrigin: '12px 7px',
+        ...(tilt !== undefined ? { transform: `rotate(${tilt}deg)` } : {}),
+      }}
+      onAnimationEnd={onRockEnd}
+    >
       <path d="M4 7h16" />
       <path d="M4 7 2 12a2.5 2.5 0 0 0 5 0L4 7Z" />
       <path d="M20 7l-2 5a2.5 2.5 0 0 0 5 0l-3-5Z" />
@@ -62,6 +69,7 @@ function App() {
   const [revealed2, setRevealed2] = useState(false)
   const [passed2, setPassed2] = useState(false)
   const [escalate, setEscalate] = useState(false)
+  const [finalTilt, setFinalTilt] = useState(null)
   const recognitionRef2 = useRef(null)
 
   useEffect(() => {
@@ -69,6 +77,10 @@ function App() {
     const timer = setTimeout(() => setEscalate(true), 15000)
     return () => clearTimeout(timer)
   }, [passed2])
+
+  const handleRockEnd = () => {
+    if (finalTilt === null) setFinalTilt([-24, 0, 24][Math.floor(Math.random() * 3)])
+  }
 
   const listen = ({ requiredTokens, setListening, setMatchedCount, onDone }) => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -172,29 +184,22 @@ function App() {
         className="absolute inset-0 bg-black transition-opacity duration-[1500ms] pointer-events-none"
         style={{ opacity: passed ? 1 : 0 }}
       />
-      <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div
-          className="w-full max-w-md -mb-32 transition-transform duration-[1500ms] ease-in"
-          style={{
-            transform: passed ? 'scale(6)' : 'scale(1)',
-            transformOrigin: 'bottom center',
-            transitionDelay: passed ? '400ms' : '0ms',
-            zIndex: 20,
-          }}
-        >
-          <Head />
-        </div>
+      <div
+        className="absolute left-0 right-0 w-full flex flex-col items-center overflow-visible"
+        style={{ top: 'max(2rem, 6dvh)' }}
+      >
         <button
           type="button"
           onClick={() => setCount((c) => c + 1)}
           aria-label={`count ${count}`}
           className="w-full transition-transform duration-[1500ms] ease-in"
           style={{
-            transform: passed ? 'translateY(100%)' : 'translateY(0)',
+            transform: passed ? 'scale(6)' : 'scale(1)',
+            transformOrigin: 'bottom center',
             transitionDelay: passed ? '400ms' : '0ms',
           }}
         >
-          <Body />
+          <Figure />
         </button>
       </div>
       <div
@@ -280,17 +285,21 @@ function App() {
           background: 'radial-gradient(ellipse at bottom, rgba(183,134,12,0.55), rgba(183,134,12,0) 70%)',
         }}
       />
+      {passed2 ? (
+        <div className={`absolute inset-0 flex items-center justify-center${escalate ? ' escalation-container' : ''}`} style={{ backgroundColor: '#000000' }}>
+          <BalanceIcon
+            className={escalate ? 'escalation-svg' : ''}
+            rocking={escalate && finalTilt === null}
+            tilt={escalate ? (finalTilt ?? undefined) : 0}
+            onRockEnd={handleRockEnd}
+            style={{ width: 'clamp(44px, 11vh, 72px)', height: 'auto', color: '#ffffff' }}
+          />
+        </div>
+      ) : (
       <div className="grid" style={{ placeItems: 'center' }}>
       <div
         className="flex flex-col items-center rotate-in-hint"
-        style={{
-          gridArea: '1 / 1',
-          opacity: passed2 ? 0 : 1,
-          transform: passed2 ? 'scale(1.15)' : 'scale(1)',
-          filter: passed2 ? 'blur(14px)' : 'blur(0px)',
-          transition: 'opacity 700ms ease, transform 900ms ease, filter 700ms ease',
-          pointerEvents: passed2 ? 'none' : 'auto',
-        }}
+        style={{ gridArea: '1 / 1' }}
       >
         <AnubiIcon style={{ width: 'clamp(36px, 7vh, 64px)', height: 'auto', color: '#B8860B' }} />
         <div className="grid" style={{ placeItems: 'center', marginTop: 'clamp(16px, 4vh, 32px)' }}>
@@ -368,31 +377,9 @@ function App() {
           )}
         </button>
       </div>
-      <div
-        className="flex items-center justify-center"
-        style={{
-          gridArea: '1 / 1',
-          width: 'clamp(90px, 22vh, 140px)',
-          height: 'clamp(90px, 22vh, 140px)',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(184,134,11,0.35), rgba(184,134,11,0) 70%)',
-          opacity: passed2 ? 1 : 0,
-          transform: passed2 ? 'scale(1)' : 'scale(0.4)',
-          filter: passed2 ? 'blur(0px)' : 'blur(10px)',
-          transition: 'opacity 800ms ease-out, transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 800ms ease-out',
-          transitionDelay: passed2 ? '350ms' : '0ms',
-          pointerEvents: 'none',
-        }}
-      >
-        <BalanceIcon style={{ width: 'clamp(44px, 11vh, 72px)', height: 'auto', color: '#B8860B' }} />
       </div>
-      </div>
+      )}
     </div>
-    {escalate && (
-      <div className="escalation-container force-landscape fixed inset-0 z-50">
-        <BalanceIcon className="escalation-svg" rocking />
-      </div>
-    )}
     </main>
   )
 }

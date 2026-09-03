@@ -23,7 +23,7 @@ body {
   justify-content: center;
   height: 100dvh;
   background-color: #000000;
-  animation: escalatingEnergy 16s ease-in-out infinite;
+  animation: escalatingEnergy 16s ease-in-out 1 forwards;
 }
 
 .force-landscape {
@@ -58,7 +58,7 @@ body {
   height: auto;
   color: #ffffff;
   mix-blend-mode: difference;
-  animation: escalatingScale 16s ease-in infinite;
+  animation: escalatingScale 16s ease-in 1 forwards;
 }
 
 /* Glitch runs over the first 75% (12s); last 25% (4s) is a held black stop. */
@@ -68,7 +68,7 @@ body {
 }
 
 .balance-beam {
-  animation: beamRock 16s infinite;
+  animation: beamRock 16s 1 forwards;
 }
 
 @keyframes beamRock {
