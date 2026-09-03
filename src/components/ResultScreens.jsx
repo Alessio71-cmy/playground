@@ -174,10 +174,6 @@ function ResultScreen({ Image, Icon, title, subtitle, line }) {
   )
 }
 
-// Reserved title height (7 lines, the tallest of the light-screen titles) so the figure
-// below always starts at the same offset, regardless of how many lines a given title wraps to.
-const LIGHT_TITLE_MIN_HEIGHT = 38 * 1.1 * 7
-
 function LightResultScreen({ Icon, title, subtitle, line }) {
   const titleLines = Array.isArray(title) ? title : [title]
   return (
@@ -189,16 +185,21 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
         className="absolute inset-0 solemn-gradient"
         style={{ background: 'linear-gradient(to bottom, #B8860B, #FFFFFF)', animationDelay: '0ms' }}
       />
+      <Figure
+        mainColor="#ffffff"
+        className="relative solemn-rise"
+        style={{ width: 'clamp(90px, 19dvh, 150px)', height: 'auto', flexShrink: 0, animationDelay: '0ms' }}
+      />
       <p
         className="relative max-w-3xl solemn-rise"
         style={{
-          minHeight: LIGHT_TITLE_MIN_HEIGHT,
+          marginTop: 'clamp(12px, 3dvh, 24px)',
           fontSize: 38,
           lineHeight: 1.1,
           fontWeight: 300,
           fontStyle: 'italic',
           color: GOLD,
-          animationDelay: '0ms',
+          animationDelay: '150ms',
         }}
       >
         {titleLines.map((l, i) => (
@@ -208,20 +209,15 @@ function LightResultScreen({ Icon, title, subtitle, line }) {
           </span>
         ))}
       </p>
-      <Figure
-        mainColor="#ffffff"
-        className="relative solemn-rise"
-        style={{ width: '100%', height: 'auto', flexShrink: 0, marginTop: 'clamp(24px, 6dvh, 48px)', animationDelay: '350ms' }}
-      />
-      <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-4 sm:pb-8">
-        <div className="solemn-rise" style={{ animationDelay: '600ms' }}>
+      <div className="relative flex flex-col items-center" style={{ marginTop: 'clamp(12px, 3dvh, 24px)' }}>
+        <div className="solemn-rise" style={{ animationDelay: '300ms' }}>
           {subtitle.map((s, i) => (
             <p key={i} style={{ fontSize: 14, color: GOLD, marginTop: i === 0 ? 0 : 4 }}>
               {s}
             </p>
           ))}
         </div>
-        <div className="flex items-center solemn-rise" style={{ gap: 4, marginTop: 4, animationDelay: '800ms' }}>
+        <div className="flex items-center solemn-rise" style={{ gap: 4, marginTop: 4, animationDelay: '450ms' }}>
           <Icon style={{ width: 22, height: 22, color: GOLD }} />
           <span style={{ fontSize: 22, color: GOLD }}>{line}</span>
         </div>
