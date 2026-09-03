@@ -79,10 +79,10 @@ function App() {
     return () => clearTimeout(timer)
   }, [passed2])
 
-  // Post-glitch result screen holds for 10s, then fades out before the "embrace failure" phrase appears.
+  // Post-glitch result screen holds for 8s, then fades out before the "embrace failure" phrase appears.
   useEffect(() => {
     if (!result) return
-    const timer = setTimeout(() => setResultFadingOut(true), 10000)
+    const timer = setTimeout(() => setResultFadingOut(true), 8000)
     return () => clearTimeout(timer)
   }, [result])
 
@@ -112,8 +112,8 @@ function App() {
     setIntroKey((k) => k + 1)
   }, [passed3])
 
-  // Glitch + rocking run for 18s (beamRock/escalatingEnergy), settling on restTilt
-  // for the last 6s. Reveal the result screen once the balance has held still.
+  // Glitch + rocking run for 16s (beamRock/escalatingEnergy), settling on restTilt
+  // for the last 4s. Reveal the result screen once the balance has held still.
   useEffect(() => {
     if (!escalate) return
     const timer = setTimeout(() => {
@@ -126,7 +126,7 @@ function App() {
       } else {
         setResult({ Screen: LightResultScreen, data: LIGHT_SCREENS[Math.floor(Math.random() * LIGHT_SCREENS.length)] })
       }
-    }, 18000)
+    }, 16000)
     return () => clearTimeout(timer)
   }, [escalate, restTilt])
 
